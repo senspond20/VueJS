@@ -1,0 +1,29 @@
+{
+  "name": "hello",
+  "version": "1.0.0",
+  "description": "+ https://kr.vuejs.org/v2/guide/",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senspond20/VueJS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/senspond20/VueJS/issues"
+  },
+  "homepage": "https://github.com/senspond20/VueJS#readme",
+  "dependencies": {
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {
+    "vue-loader": "^15.9.5",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^5.10.1",
+    "webpack-cli": "^4.2.0"
+  }
+}
