@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <!-- https://kr.vuejs.org/v2/guide/ -->
+    <!-- 도움되는 콘솔 경고를 포함한 개발 버전-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <h1>끝말잇기</h1>
+    <div id ="root">
+        <!-- 컴포넌트화 / props 리액트랑 흡사-->
+        <!-- 캐멀케이스(startWord)가 아닌 캐바케이스(start-Word)로 해야한다.-->
+        <word-relay start-Word='똑순이'></word-relay>
+        <word-relay start-Word='초밥'></word-relay>
+        <word-relay start-Word='바보'></word-relay>
+    </div>
+    <script>
+        // 컴포넌트 - 전역 컴포넌트 
+        Vue.component('wordRelay',{
+        // Vue.component('word-relay',{
+            template: `
+            <div>
+                <div>{{word}}</div>
+                    <form v-on:submit = "onSubmitForm">
+                        <input type ="text" ref="answer" v-model ="value">
+                        <button type ="submit">입력</button>
+                    </form>
+                <div>{{result}}</div>
+            </div>
+            `,
+            // 컴포넌트에서는 여러번 사용되는것을 전제로 하기 때문에 객체화
+            data() {
+                console.log(this.startWord)
+                return{
+                    word : this.startWord,
+                    result : '',
+                    value : '',
+                };
+            },
+            props : ['startWord'],
+            methods : {
+                onSubmitForm(e){
+                    e.preventDefault();
+                    console.log(this.word, this.word[this.word.length-1], this.value)
+                    if(this.word[this.word.length - 1] === this.value[0]){
+                        this.result = '딩동댕';
+                        this.word = this.value;
+                        this.value = '';
+                        this.$refs.answer.focus();
+                    }else{
+                        this.result = '땡';
+                        this.value = '';
+                        this.$refs.answer.focus();
+                    }
+                }
+            },
+        })
+
+        // component를 만드는 스크립트가 더 위에 올라가야 한다.
+        const app = new Vue({
+            el : '#root',
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- https://kr.vuejs.org/v2/guide/ -->
+    <!-- 도움되는 콘솔 경고를 포함한 개발 버전-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- 상용버전, 속도와 용량이 최적화됨-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <title>Vue</title>
+</head>
+<body>
+    <!-- component 시스템의 필요성-->
+    <div id ="root">
+        <div v-if="liked1">좋아요 눌렀음</div>
+        <button v-else v-on:click="onClickButton1">Like</button>
+
+        <div v-if="liked2">좋아요 눌렀음</div>
+        <button v-else v-on:click="onClickButton2">Like</button>
+        
+        <div v-if="liked3">좋아요 눌렀음</div>
+        <button v-else v-on:click="onClickButton3">Like</button>
+    </div>
+<script>
+    // jqeury랑 방식이 다르다.
+    // 리액트와 뷰는 상태(리액트:state)와 데이터(뷰:data)를 중심으로 다룬다.
+    const app = new Vue({
+        el : '#root', // root를 Vue가 통제하고 있다.
+        data : {
+            liked1 : false, //liked 라는 데이터가 false
+            liked2 : false, 
+            liked3 : false, 
+        },
+        methods: {
+            onClickButton1(){
+                this.liked1 = true; //data.liked = true
+            },
+            onClickButton2(){
+                this.liked2 = true; //data.liked = true
+            },
+            onClickButton3(){
+                this.liked3 = true; //data.liked = true
+            }
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
