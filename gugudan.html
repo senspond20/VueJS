@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- https://kr.vuejs.org/v2/guide/ -->
+    <!-- 도움되는 콘솔 경고를 포함한 개발 버전-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- 상용버전, 속도와 용량이 최적화됨-->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <title>Document</title>
+</head>
+<body>
+    <!-- 구구단 문제 출제 : Vue -->
+    <div id="root">
+        <div>{{first}} 곱하기 {{second}}는?</div>
+        <form v-on:submit ="onSubmitForm">
+            <input type ="number" ref="answer" v-model="value">
+            <button>입력</button>
+
+            <!-- 양방향 바인딩 : input에 들어오는 데이터에 따라 자동으로 <div></div>안의 데이터가 바뀜 -->
+            <!-- <div>{{value}}</div>   -->
+        </form>
+        <div id ="result">{{result}}</div>
+    </div>
+    <script>
+        // 리액트는 status 상태(상태관리 -> 리덕스),
+        // 뷰는 data 데이터를 중심으로 사고!
+        const app = new Vue({
+            el : '#root',
+            data : {
+                first : Math.ceil(Math.random() * 9),
+                second : Math.ceil(Math.random() * 9),
+                value : '',
+                result : '',
+            },
+            methods : {
+                onSubmitForm(e){
+                    // form 에서 페이지 새로고침을 막기
+                    e.preventDefault();
+                    console.log(this.first, this.second, Number(this.value), parseInt(this.value))
+                    if(this.first * this.second === parseInt(this.value)){
+                        this.result = '정답';
+                        // 맞았으면 새로 문제 출제
+                        this.first = Math.ceil(Math.random() * 9);
+                        this.second = Math.ceil(Math.random() * 9);
+                        this.value = '';
+
+                        // Jquery : $('선택자').focus();
+                        this.$refs.answer.focus(); 
+                        // 리액트에서 특정DOM을 선택할때 useRef 사용하는것과 비슷
+
+                    }else{
+                        this.result = '땡! 다시해봥~';
+                        // 틀렷으면 value 비우기
+                        this.value = '';
+                        this.$refs.answer.focus();
+                    }
+                },
+            },
+        });
+    </script>
+</body>
+</html>
