@@ -1,0 +1,38 @@
+<template>
+    <div id="app">
+      <form @submit.prevent="createPost">
+        <input placeholder="name" v-model="post.name">
+        <input placeholder="title" v-model="post.title">
+        <br>
+        <button type="submit">Create</button>
+      </form>
+      {{data}}
+    </div>
+  </template>
+  <script>
+  export default {
+    name: "App",
+    data() {
+      return {
+        post: {},
+        data: {}
+      };
+    },
+    methods: {
+      async createPost() {
+        const request = new Request(
+          "https://jsonplaceholder.typicode.com/posts",
+          {
+            method: "POST",
+            mode: "cors",
+            cache: "default",
+            body: JSON.stringify(this.post)
+          }
+        );
+        const res = await fetch(request);
+        const data = await res.json();
+        this.data = data;
+      }
+    }
+  };
+  </script>
