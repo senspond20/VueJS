@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+
+    <style>
+        .fade-transition {
+            transition: all 0.8s ease;
+            overflow: hidden;
+            visibility: visible;
+            opacity: 1;
+            position: absolute;
+        }
+
+        .fade-enter,
+        .fade-leave {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <article id="image-slider">
+        <p>
+            <button @click="prev">Previous</button> || <button @click="next">Next</button>
+            <button @click="startRotation">자동 슬라이드</button> || <button @click="stopRotation">자동 슬라이드 Stop</button>
+        </p>
+        <div v-for="number in [currentNumber]" transition="fade">
+            <img :src="images[Math.abs(currentNumber) % images.length]" v-on:mouseover="stopRotation"
+                v-on:mouseout="startRotation" />
+        </div>
+    </article>
+
+    <script>
+        var imgSlider = new Vue({
+            el: '#image-slider',
+            data: {
+                images: [
+                    'https://images.unsplash.com/photo-1593642532973-d31b6557fa68?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1615385164509-79243b513da2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80',
+                    'https://images.unsplash.com/photo-1615383915140-a893a0e95d32?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=701&q=80',
+                    'https://images.unsplash.com/photo-1615372021685-b2dc6f9c2819?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=564&q=80',
+                    'https://images.unsplash.com/photo-1615378536579-61c7d173e8a9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+                ],
+                currentNumber: 0,
+                timer: null
+            },
+
+            ready: function () {
+                this.startRotation();
+            },
+
+            methods: {
+                startRotation: function () {
+                    this.timer = setInterval(this.next, 500);
+                },
+
+                stopRotation: function () {
+                    clearTimeout(this.timer);
+                    this.timer = null;
+                },
+
+                next: function () {
+                    this.currentNumber += 1
+                },
+                prev: function () {
+                    this.currentNumber -= 1
+                }
+            }
+
+        });
+
+        imgSlider.ready();
+    </script>
+
+
+</body>
+
+</html>

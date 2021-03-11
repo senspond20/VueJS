@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    
+    <style>
+
+         html,body,.main{margin: 0; padding: 0;}
+        .item-wrap{display: flex; justify-content: center; align-items: center; width: 100vw; height: 100vh;}
+        .item-wrap:nth-of-type(1){background-color: red;}
+        .item-wrap:nth-of-type(2){background-color: lawngreen;}
+        .item-wrap:nth-of-type(3){background-color: bisque;}
+        .item-wrap:nth-of-type(4){background-color: blueviolet;}
+        .item-wrap:nth-of-type(5){background-color: black;}
+        .item-wrap .item{width: 30vw;height: 30vh; background-color: aliceblue; border-radius: 5px;}
+        
+    </style>
+</head>
+<body>
+    <section class="main">
+        <article class="item-wrap" v-if ="(stage == 1)">
+            <div class="item">
+                <span>1</span>
+                <div>
+                    <button class='prev-btn' v-on:click="prev">이전</button>
+                    <button class='next-btn' v-on:click="next">다음</button>
+                </div>
+            </div>
+        </article>
+        <article class="item-wrap" v-if ="(stage == 2)">
+            <div class="item">
+                <span>2</span>
+                <div>
+                    <button class='prev-btn' v-on:click="prev">이전</button>
+                    <button class='next-btn' v-on:click="next">다음</button>
+                </div>
+            </div>
+        </article>
+        <article class="item-wrap" v-if ="(stage == 3)">
+            <div class="item">
+                <span>3</span>
+                <div>
+                    <button class='prev-btn' v-on:click="prev">이전</button>
+                    <button class='next-btn' v-on:click="next">다음</button>
+                </div>
+            </div>
+        </article>
+        <article class="item-wrap" v-if ="(stage == 4)">
+            <div class="item">
+                <span>4</span>
+                <div>
+                    <button class='prev-btn' v-on:click="prev">이전</button>
+                    <button class='next-btn' v-on:click="next">다음</button>
+                </div>
+            </div>
+        </article>
+        <article class="item-wrap" v-if ="(stage == 5)">
+            <div class="item">
+                <span>5</span>
+                <div>
+                    <button class='prev-btn' v-on:click="prev">이전</button>
+                    <button class='next-btn' v-on:click="next">다음</button>
+                </div>
+            </div>
+        </article>
+    </section>
+    <script>
+        var main = new Vue({
+            el :'.main',
+            data : {
+                stage : 1,
+                size : 5
+            },
+            methods: {
+                prev: function() {
+                   if(this.stage != 1)
+                       this.stage--;
+                },
+                next :function(){
+                    if(this.stage != this.size)
+                        this.stage++;
+                }
+            }
+
+        });
+
+    </script>
+</body>
+</html>
